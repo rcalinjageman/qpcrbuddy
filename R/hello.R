@@ -73,7 +73,7 @@ process_directory <- function(
 
 process_file <- function(
     my_file = NULL,
-    save_file = TRUE,
+    save_file = TRUE
   ) {
 
 
