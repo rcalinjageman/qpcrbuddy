@@ -19,7 +19,8 @@ hello <- function() {
 
 
 process_directory <- function(
-    my_directory = NULL
+    my_directory = NULL,
+    save_file = TRUE
   ) {
 
 
@@ -61,13 +62,18 @@ process_directory <- function(
     sep = ""
   )
 
-  write.csv(tbl_output, new_name)
+  if (save_file) {
+    write.csv(tbl_output, new_name)
+  }
+
+  return(tbl_output)
 
 }
 
 
 process_file <- function(
-    my_file = NULL
+    my_file = NULL,
+    save_file = TRUE,
   ) {
 
 
@@ -86,8 +92,12 @@ process_file <- function(
     sep = ""
   )
 
+  if (save_file) {
+    write.csv(tbl_output, new_name)
 
-  write.csv(tbl_output, new_name)
+  }
+
+  return(tbl_output)
 
 }
 
