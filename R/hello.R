@@ -259,6 +259,49 @@ do_qpcr <- function(my_file) {
   my_data$is_trained <- !my_data$is_control
 
 
+  if (any(grepl("VC", my_data$condition))) {
+
+    my_data$cell_type <- str_replace(
+      my_data$condition,
+      "T ",
+      ""
+    )
+
+    my_data$cell_type <- str_replace(
+      my_data$cell_type,
+      "C ",
+      ""
+    )
+
+    my_data$z_series <- paste(
+      my_data$z_series,
+      my_data$cell_type,
+      sep = " - "
+    )
+
+    my_data$condition <- str_replace(
+      my_data$condition,
+      " VC",
+      ""
+    )
+
+    my_data$condition <- str_replace(
+      my_data$condition,
+      " FM",
+      ""
+    )
+
+    my_data$condition <- trimws(my_data$condition)
+
+    my_data$is_control <- FALSE
+    my_data[contains("c", my_data$condition, ignore.case = TRUE), ]$is_control <- TRUE
+
+    my_data$is_trained <- !my_data$is_control
+
+
+  }
+
+
   # Now process each sample
 
   samples <- unique(my_data$z_series)
